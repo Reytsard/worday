@@ -78,7 +78,7 @@ export async function fetchWordEntry(word: string): Promise<WordEntry> {
 
   const meanings: Meaning[] = (entry.meanings ?? []).map((m) => ({
     partOfSpeech: m.partOfSpeech ?? '',
-    definitions: (m.definitions ?? []).slice(0, 3).map((d) => ({
+    definitions: (m.definitions ?? []).slice(0, 5).map((d) => ({
       definition: d.definition ?? '',
       example: d.example ?? null,
     })),

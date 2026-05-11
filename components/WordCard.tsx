@@ -25,62 +25,84 @@ export default function WordCard({ entry }: WordCardProps) {
       </div>
 
       {/* Meanings */}
-      {entry.meanings.map((meaning, i) => (
-        <div key={i}>
-          <div className="border-t-[3px] border-[#0A0A0A] my-6" />
+      {entry.meanings.map((meaning, i) => {
+        const examples = meaning.definitions
+          .map((d) => d.example)
+          .filter((e): e is string => e !== null);
 
-          <div className="mb-4">
-            <span className="brutal-badge">{meaning.partOfSpeech.toUpperCase()}</span>
-          </div>
+        return (
+          <div key={i}>
+            <div className="border-t-[3px] border-[#0A0A0A] my-6" />
 
-          <ol className="space-y-4">
-            {meaning.definitions.map((def, j) => (
-              <li key={j} className="flex gap-3">
-                {meaning.definitions.length > 1 && (
-                  <span
-                    className="text-sm font-bold shrink-0"
-                    style={{ color: "#FF2D00", minWidth: "1.25rem" }}
-                  >
-                    {j + 1}.
-                  </span>
-                )}
-                <div>
-                  <p className="text-base leading-relaxed">{def.definition}</p>
-                  {def.example && (
-                    <p className="text-sm italic mt-1" style={{ color: "#555" }}>
-                      &ldquo;{def.example}&rdquo;
-                    </p>
+            <div className="mb-4">
+              <span className="brutal-badge">{meaning.partOfSpeech.toUpperCase()}</span>
+            </div>
+
+            {/* Definitions */}
+            <ol className="space-y-3">
+              {meaning.definitions.map((def, j) => (
+                <li key={j} className="flex gap-3">
+                  {meaning.definitions.length > 1 && (
+                    <span
+                      className="text-sm font-bold shrink-0"
+                      style={{ color: "#FF2D00", minWidth: "1.25rem" }}
+                    >
+                      {j + 1}.
+                    </span>
                   )}
-                </div>
-              </li>
-            ))}
-          </ol>
+                  <p className="text-base leading-relaxed">{def.definition}</p>
+                </li>
+              ))}
+            </ol>
 
-          {meaning.synonyms.length > 0 && (
-            <p className="mt-4 text-sm">
-              <span
-                className="font-bold uppercase"
-                style={{ color: "#666", letterSpacing: "0.1em" }}
-              >
-                Synonyms:{" "}
-              </span>
-              {meaning.synonyms.join(", ")}
-            </p>
-          )}
+            {/* Examples */}
+            {examples.length > 0 && (
+              <div className="mt-5 p-4" style={{ background: "#F5F0E8", border: "2px solid #0A0A0A" }}>
+                <p
+                  className="text-xs font-bold uppercase mb-3"
+                  style={{ color: "#666", letterSpacing: "0.12em" }}
+                >
+                  How it&rsquo;s used
+                </p>
+                <ul className="space-y-2">
+                  {examples.map((ex, k) => (
+                    <li key={k} className="flex gap-2">
+                      <span style={{ color: "#FF2D00" }} className="font-bold shrink-0">—</span>
+                      <p className="text-sm italic" style={{ color: "#333" }}>
+                        &ldquo;{ex}&rdquo;
+                      </p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
-          {meaning.antonyms.length > 0 && (
-            <p className="mt-2 text-sm">
-              <span
-                className="font-bold uppercase"
-                style={{ color: "#666", letterSpacing: "0.1em" }}
-              >
-                Antonyms:{" "}
-              </span>
-              {meaning.antonyms.join(", ")}
-            </p>
-          )}
-        </div>
-      ))}
+            {meaning.synonyms.length > 0 && (
+              <p className="mt-4 text-sm">
+                <span
+                  className="font-bold uppercase"
+                  style={{ color: "#666", letterSpacing: "0.1em" }}
+                >
+                  Synonyms:{" "}
+                </span>
+                {meaning.synonyms.join(", ")}
+              </p>
+            )}
+
+            {meaning.antonyms.length > 0 && (
+              <p className="mt-2 text-sm">
+                <span
+                  className="font-bold uppercase"
+                  style={{ color: "#666", letterSpacing: "0.1em" }}
+                >
+                  Antonyms:{" "}
+                </span>
+                {meaning.antonyms.join(", ")}
+              </p>
+            )}
+          </div>
+        );
+      })}
 
       {/* Action buttons */}
       <div className="border-t-[3px] border-[#0A0A0A] my-6" />
