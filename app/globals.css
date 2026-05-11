@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+:root {
+  --brutal-bg: #F5F0E8;
+  --brutal-text: #0A0A0A;
+  --brutal-accent: #FF2D00;
+  --brutal-border: 3px solid #0A0A0A;
+  --brutal-shadow: 4px 4px 0 #0A0A0A;
+  --brutal-font: var(--font-space-mono), monospace;
+}
+
+*,
+*::before,
+*::after {
+  border-radius: 0 !important;
+  font-family: var(--brutal-font);
+}
+
+body {
+  background: var(--brutal-bg);
+  color: var(--brutal-text);
+  font-family: var(--brutal-font);
+}
+
+button,
+input {
+  font-family: var(--brutal-font);
+}
+
+/* Utility classes */
+
+.brutal-border {
+  border: 3px solid #0A0A0A;
+}
+
+.brutal-shadow {
+  box-shadow: 4px 4px 0 #0A0A0A;
+}
+
+.brutal-btn {
+  font-family: var(--brutal-font);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 10px 24px;
+  background: transparent;
+  color: #0A0A0A;
+  border: 3px solid #0A0A0A;
+  cursor: pointer;
+  transition: background 0.1s ease, color 0.1s ease;
+}
+
+.brutal-btn:hover {
+  background: #0A0A0A;
+  color: #F5F0E8;
+}
+
+.brutal-badge {
+  display: inline-block;
+  font-family: var(--brutal-font);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 4px 12px;
+  background: #FF2D00;
+  color: #0A0A0A;
+}
+
+.brutal-header {
+  display: block;
+  width: 100%;
+  background: #0A0A0A;
+  color: #F5F0E8;
+  font-family: var(--brutal-font);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  padding: 12px 24px;
+}
+
+.brutal-card {
+  background: #ffffff;
+  border: 3px solid #0A0A0A;
+  box-shadow: 4px 4px 0 #0A0A0A;
+  padding: 32px;
+}

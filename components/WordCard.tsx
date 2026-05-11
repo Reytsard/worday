@@ -1,0 +1,93 @@
+import { WordEntry } from "@/lib/wordOfDay";
+import TTSButton from "@/components/TTSButton";
+import ShareButton from "@/components/ShareButton";
+
+interface WordCardProps {
+  entry: WordEntry;
+}
+
+export default function WordCard({ entry }: WordCardProps) {
+  return (
+    <div className="brutal-card">
+      {/* Word and phonetic */}
+      <div className="mb-6">
+        <h1
+          className="text-5xl md:text-6xl font-bold uppercase tracking-tight"
+          style={{ color: "#0A0A0A" }}
+        >
+          {entry.word}
+        </h1>
+        {entry.phonetic && (
+          <p className="text-lg mt-2" style={{ color: "#555" }}>
+            {entry.phonetic}
+          </p>
+        )}
+      </div>
+
+      {/* Meanings */}
+      {entry.meanings.map((meaning, i) => (
+        <div key={i}>
+          <div className="border-t-[3px] border-[#0A0A0A] my-6" />
+
+          <div className="mb-4">
+            <span className="brutal-badge">{meaning.partOfSpeech.toUpperCase()}</span>
+          </div>
+
+          <ol className="space-y-4">
+            {meaning.definitions.map((def, j) => (
+              <li key={j} className="flex gap-3">
+                {meaning.definitions.length > 1 && (
+                  <span
+                    className="text-sm font-bold shrink-0"
+                    style={{ color: "#FF2D00", minWidth: "1.25rem" }}
+                  >
+                    {j + 1}.
+                  </span>
+                )}
+                <div>
+                  <p className="text-base leading-relaxed">{def.definition}</p>
+                  {def.example && (
+                    <p className="text-sm italic mt-1" style={{ color: "#555" }}>
+                      &ldquo;{def.example}&rdquo;
+                    </p>
+                  )}
+                </div>
+              </li>
+            ))}
+          </ol>
+
+          {meaning.synonyms.length > 0 && (
+            <p className="mt-4 text-sm">
+              <span
+                className="font-bold uppercase"
+                style={{ color: "#666", letterSpacing: "0.1em" }}
+              >
+                Synonyms:{" "}
+              </span>
+              {meaning.synonyms.join(", ")}
+            </p>
+          )}
+
+          {meaning.antonyms.length > 0 && (
+            <p className="mt-2 text-sm">
+              <span
+                className="font-bold uppercase"
+                style={{ color: "#666", letterSpacing: "0.1em" }}
+              >
+                Antonyms:{" "}
+              </span>
+              {meaning.antonyms.join(", ")}
+            </p>
+          )}
+        </div>
+      ))}
+
+      {/* Action buttons */}
+      <div className="border-t-[3px] border-[#0A0A0A] my-6" />
+      <div className="flex gap-4 flex-wrap">
+        <TTSButton word={entry.word} audioUrl={entry.audio} />
+        <ShareButton entry={entry} />
+      </div>
+    </div>
+  );
+}
